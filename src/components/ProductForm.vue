@@ -160,7 +160,7 @@ import utils from "../utils.js";
 import Tipology from "../data/Tipology.js";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import firebaseApp from "../firebase.js"
-import { getFirestore, collection } from "firebase/firestore";
+import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
 import { addDoc,  doc, setDoc } from "firebase/firestore"; 
 
 export default {
@@ -248,12 +248,6 @@ export default {
           self.insertNewCategory(value);
         })
         .catch(() => {
-          /*
-        this.$message({
-          type: "info",
-          message: "Input canceled",
-        });
-        */
         });
     },
     colorPicked: function(color) {
@@ -286,12 +280,28 @@ export default {
           .catch((error) => {
               console.log(error)
           });
+    },
+    async getMaxCode() {
+      const db = getFirestore(firebaseApp);
+      const q = query(collection(db, "wines"), where("status", "==", 1));
+
+      const querySnapshot = await getDocs(q);
+      var max = 0;
+      querySnapshot.forEach((doc) => {
+        if(max < doc.data().code) max = doc.data().code;
+      });
+      this.product.code = Number(max) + 1;
     }
   },
   mounted() {
     this.product = this.data;
+    if(this.product.code == 0) {
+      this.getMaxCode();
+    }
     this.color = this.product.color;
-    this.loadImage();
+    if(this.product.code > 0) {
+      this.loadImage();
+    }
   },
 };
 </script>
