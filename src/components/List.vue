@@ -36,6 +36,7 @@ import firebaseApp from "../firebase.js"
 import { getFirestore, collection, query, where, orderBy, onSnapshot } from "firebase/firestore";
 import VueHorizontal from 'vue-horizontal';
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import utils from '../utils'
 
 export default {
     name: 'List',
@@ -118,14 +119,15 @@ export default {
                 where("type", "==", this.tipology),
                 orderBy("name"));
             onSnapshot(q, (querySnapshot) => {
-              this.winelist = [];
-              querySnapshot.forEach((doc) => {
-                var record = doc.data();
-                record.id = doc.id;
-                record.effectiveUrl = {url:''};
-                this.getStorageImgUrl(record.imgUrls[0], record.effectiveUrl)
-                this.winelist.push(record);
-              });
+                this.winelist = [];
+                querySnapshot.forEach((doc) => {
+                    var record = doc.data();
+                    record.id = doc.id;
+                    record.effectiveUrl = {url:''};
+                    record.price = utils.formatPrice(record.price, true);
+                    this.getStorageImgUrl(record.imgUrls[0], record.effectiveUrl);
+                    this.winelist.push(record);
+                });
                 console.log('loadProducts', this.winelist)
                 this.getRegions();
             });
