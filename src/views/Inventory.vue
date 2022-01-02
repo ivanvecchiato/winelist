@@ -86,7 +86,7 @@ import { getFirestore, collection, query, where, getDocs, orderBy } from "fireba
 import { addDoc, onSnapshot } from "firebase/firestore"; 
 import { doc, setDoc, deleteDoc } from "firebase/firestore";
 
-//import utils from "../utils.js";
+import utils from "../utils.js";
 import Product from "../data/Product.js";
 import ProductForm from "../components/ProductForm.vue";
 
@@ -330,21 +330,14 @@ export default {
     async loadProducts () {
       const db = getFirestore(firebaseApp);
       const q = query(collection(db, "wines"), where("status", "==", 1), orderBy("name"));
-      /*
-      const querySnapshot = await getDocs(q);
-      this.products = [];
-      querySnapshot.forEach((doc) => {
-        var record = doc.data();
-        record.id = doc.id;
-        this.products.push(record);
-      });
-      */
 
       onSnapshot(q, (querySnapshot) => {
         this.products = [];
         querySnapshot.forEach((doc) => {
           var record = doc.data();
           record.id = doc.id;
+          record.price = utils.formatPrice(record.price);
+          record.cost = utils.formatPrice(record.cost);
           this.products.push(record);
         });
       });
