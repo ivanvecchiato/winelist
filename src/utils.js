@@ -1,7 +1,9 @@
 
 export default {
-  formatCurrency (amount) {
-    return Number(amount).toFixed(2)
+  formatPrice (amount, currency) {
+    var formatted = Number(amount.replace(',', '.')).toFixed(2);
+    if(currency) formatted += " €";
+    return formatted;
   },
   uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
