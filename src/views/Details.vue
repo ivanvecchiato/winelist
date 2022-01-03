@@ -6,8 +6,14 @@
         <span class="back-button" @click="closeDetails()">
           <b-icon icon="arrow-left-square" style="width: 40px; height: 40px;"/>
         </span>
-        <div class="product-detail">
-          <h1>{{ wine.name }}</h1>
+        <div style="float:right">
+          <div class="product-detail">
+            <h1>{{ wine.name }}</h1>
+          </div>
+          <div class="product-winery">
+            {{$t('product.winery')}}&nbsp;<span class="name">{{wine.winery.name}}</span>
+            <!--<span class="badge">{{$t('product.winery')}}</span>-->
+          </div>
         </div>
       </div>
       <div class="card-body">
@@ -20,10 +26,6 @@
             {{wine.designation}}
           </div>
           <span class="product-caption"> {{wine.grapes}} </span>
-          <div class="product-winery">
-            {{$t('product.winery')}}&nbsp;<span class="name">{{wine.winery.name}}</span>
-            <span class="badge">{{$t('product.winery')}}</span>
-          </div>
         </div>
         <div class="product-properties">
           <div class="product-size">
@@ -136,7 +138,7 @@ export default {
 
 .product-detail {
   float: right;
-  margin: 30px;
+  margin: 25px;
   text-align: right;
   max-width: 70%;
 }
@@ -180,12 +182,13 @@ export default {
   color: var(--color-highlight);
 }
 .product-winery {
-  padding: 20px 20px 5px 20px;
-  display: block;
+  float: right;
+  margin-right: 25px;;
   font-size: 18px;
   letter-spacing: 0px;
 }
 .product-winery .name {
+  float: right;
 	font-weight: bold;
 }
 .badge {
