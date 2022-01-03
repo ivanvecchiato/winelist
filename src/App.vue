@@ -38,7 +38,7 @@ export default {
 }
 :root{
   --color-primary: #795548;
-  --color-secondary: #998f8f;
+  --color-secondary: rgb(153, 143, 143);
   --color-highlight: #B71C1C;
 }
 </style>
