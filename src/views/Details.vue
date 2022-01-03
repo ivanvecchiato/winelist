@@ -2,15 +2,20 @@
   <div>
     <div class="card">
       <div class="card-head">
-        <b-button variant="light" @click="closeDetails()">indietro</b-button>
-        <span class="back-text">wines</span>
+        <!--<span class="back-text">wines</span>-->
+        <span class="back-button" @click="closeDetails()">
+          <b-icon icon="arrow-left-square" style="width: 40px; height: 40px;"/>
+        </span>
         <div class="product-detail">
           <h1>{{ wine.name }}</h1>
         </div>
       </div>
       <div class="card-body">
-        <img :src="imgUrl" alt="Shoe" class="product-img" />
+        <img :src="imgUrl" class="product-img" />
         <div class="product-desc">
+          <span class="product-price">
+            <b>{{wine.price}}</b>
+          </span>
           <div class="product-title">
             {{wine.designation}}
           </div>
@@ -21,7 +26,7 @@
           </div>
         </div>
         <div class="product-properties">
-          <span class="product-size">
+          <div class="product-size">
             <ul class="ul-size">
               <li>
                 <div class="detail-card">
@@ -48,11 +53,11 @@
                 </div>
               </li>
             </ul>
-          </span>
-          <b-button variant="light" @click="closeDetails()">indietro</b-button>
-          <span class="product-price">
-            <b>23,453</b>
-          </span>
+          </div>
+
+          <div class="description">
+            {{wine.description}}
+          </div>
         </div>
       </div>
     </div>
@@ -116,7 +121,11 @@ export default {
   background: linear-gradient(135deg, #ffebee 8%, #ef9a9a 83%);
   clip-path: polygon(100% 0, 100% 100%, 0% 80%, 0 0%);
 }
-
+.back-button {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
 .product-img {
   position: absolute;
   left: 0;
@@ -168,6 +177,7 @@ export default {
   display: block;
   font-size: 24px;
   letter-spacing: 0px;
+  color: var(--color-highlight);
 }
 .product-winery {
   padding: 20px 20px 5px 20px;
@@ -194,25 +204,8 @@ export default {
   display: block;
   font-size: 18px;
   font-weight: 400;
+  color: var(--color-secondary);
 }
-
-.product-rating {
-  padding: 0 20px;
-  font-size: 11px;
-}
-
-.product-rating i.grey {
-  color: #acacab;
-}
-
-.product-size h4 {
-  font-size: 11px;
-  padding: 0 21px;
-  margin-top: 15px;
-  padding-bottom: 10px;
-  text-transform: uppercase;
-}
-
 .ul-size li {
   list-style: none;
   float: left;
@@ -226,56 +219,18 @@ export default {
   clear: both;
 }
 
-.product-color h4 {
-  font-size: 11px;
-  padding: 0 21px;
-  margin-top: 20px;
-  padding-bottom: 20px;
-  text-transform: uppercase;
-}
-
-.ul-color {
-  margin-left: 27px;
-}
-
-.ul-color li {
-  list-style: none;
-  float: left;
-  margin-right: 20px;
-}
-
-.ul-color li a {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  border-radius: 100%;
-}
-
-.ul-color li a.orange {
-  background: #f35e3d;
-}
-
-.ul-color li a.green {
-  background: #11e95b;
-}
-
-.ul-color li a.yellow {
-  background: #ffd414;
-}
-
 .product-price {
-  position: absolute;
-  background: #11e95b;
+  position: relative;
+  top: -30px;
+  right: 0px;
+  background: var(--color-secondary);
   padding: 7px 20px;
   text-align: center;
-  display: inline-block;
-  font-size: 24px;
-  font-weight: 200;
+  font-size: 20px;
+  font-weight: 400;
   color: #fff;
-  border-radius: 7px;
-  margin-top: -13px;
-  margin-left: -5px;
-  box-shadow: -10px 20px 15px -10px rgba(17, 233, 91, 0.3);
+  border-radius: 8px;
+  box-shadow: 5px 5px 10px var(--color-secondary);
 }
 .product-desc {
   float: right;
@@ -284,6 +239,12 @@ export default {
 }
 .product-properties {
   float: right;
+}
+.description {
+  float: right;
+	text-align: justify;
+  max-width: 60%;
+  color: var(--color-primary);
 }
 .close-button {
   width: 50px;
