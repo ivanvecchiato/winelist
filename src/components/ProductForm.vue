@@ -38,6 +38,13 @@
                 :options="wine_sizes"
                 v-model="product.size"/>
             </b-col>
+            <b-col cols="2">
+              <label for="product-vintage">{{$t('product.vintage')}}</label>
+              <b-form-input
+                id="product-vintage"
+                :label="$t('product.vintage')"
+                v-model="product.vintage"/>
+            </b-col>
             <b-col>
               <label for="product-winery">{{$t('product.winery')}}</label>
               <b-form-input
