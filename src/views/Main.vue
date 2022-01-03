@@ -1,19 +1,21 @@
 <template>
   <div class="main">
     <img alt="Vue logo" src="../assets/logo.png" :class="{scaleImage : scaling}">
-    <b-container class="bottom">
+    <b-container class="bottom" fluid>
       <b-row class="justify-content-md-center">
-        <b-col cols="1">
+        <b-col>
           <b-list-group flush>
+            <!--
             <b-list-group-item button>
               <span class="vertical" @click="loadList()">{{$t('generic.all')}}</span>
             </b-list-group-item>
+            -->
             <b-list-group-item button v-for="typology, index in typologies" :key="typology">
               <span class="vertical" @click="loadList(types[index])">{{typology}}</span>
             </b-list-group-item>
           </b-list-group>
         </b-col>
-        <b-col class="center">
+        <b-col class="center" cols="8">
           <component
             :is="currentContent"
             v-bind="currentProperties"
