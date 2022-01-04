@@ -40,5 +40,6 @@ export default {
   --color-primary: #795548;
   --color-secondary: rgb(153, 143, 143);
   --color-highlight: #B71C1C;
+  --color-light: #FFECB3
 }
 </style>
