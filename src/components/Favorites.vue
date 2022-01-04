@@ -3,9 +3,10 @@
         <div>head</div>
         <vue-horizontal class="horizontal-selectors">
             <div v-for="fav in favorites" :key="fav.id" class="horizontal-selector">
-                <div class="card">
+                <div class="card" @click="showDetails(fav)">
                     <span class="fav-name">{{fav.name}}</span>
                     <img :src="fav.effectiveUrl.url" class="fav-img"/>
+                    <span class="fav-desc">{{fav.designation}}</span>
                     <span class="fav-price">{{fav.price}}</span>
                 </div>
             </div>
@@ -32,6 +33,14 @@ export default {
         }
     },
     methods: {
+        showDetails: function(item) {
+            this.$router.push({
+                name: 'details',
+                params: {
+                    wine: item
+                }
+            })
+        },
         getImgUrl: function(effective) {
             effective.url = require('../assets/bottle2.png')
         },
@@ -91,6 +100,7 @@ export default {
     padding: 10px;
     border-radius: 8px;
     min-height: 220px;
+    max-width: 160px;
     min-width: 160px;
 }
 .horizontal-selectors {
@@ -101,7 +111,7 @@ export default {
     margin-right: 5px;
 }
 .fav-name {
-    position: absolute;
+    position: relative;
     font-family: 'Montserrat';
     letter-spacing: -1px;
     top: 5px;
@@ -109,6 +119,14 @@ export default {
     width: 70%;
     font-size: 1.0em;
     color: var(--color-primary);
+}
+.fav-desc {
+    margin-top: 10px;
+    letter-spacing: 0.05em;
+    font-size: 0.7em;
+    background-color: var(--color-light);
+    border-radius: 4px;
+    display: block;
 }
 .fav-price {
     position: absolute;

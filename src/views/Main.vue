@@ -1,28 +1,26 @@
 <template>
   <div class="main">
     <img alt="Vue logo" src="../assets/logo.png" :class="{scaleImage : scaling}">
-    <b-container class="bottom" fluid>
-      <b-row class="justify-content-md-center">
-        <b-col>
-          <b-list-group flush>
-            <!--
-            <b-list-group-item button>
-              <span class="vertical" @click="loadList()">{{$t('generic.all')}}</span>
-            </b-list-group-item>
-            -->
-            <b-list-group-item button v-for="typology, index in typologies" :key="typology">
-              <span class="vertical" @click="loadList(types[index])">{{typology}}</span>
-            </b-list-group-item>
-          </b-list-group>
-        </b-col>
-        <b-col class="center" cols="8">
-          <component
-            :is="currentContent"
-            v-bind="currentProperties"
-            :key="randKey()"></component>
-        </b-col>
-      </b-row>
-    </b-container>
+    <div class="container">
+      <div class="side-menu">
+        <b-list-group flush>
+          <!--
+          <b-list-group-item button>
+            <span class="vertical" @click="loadList()">{{$t('generic.all')}}</span>
+          </b-list-group-item>
+          -->
+          <b-list-group-item button v-for="typology, index in typologies" :key="typology">
+            <span class="vertical" @click="loadList(types[index])">{{typology}}</span>
+          </b-list-group-item>
+        </b-list-group>
+      </div>
+      <div class="center">
+        <component
+          :is="currentContent"
+          v-bind="currentProperties"
+          :key="randKey()"></component>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -74,9 +72,15 @@ export default {
   position: relative;
   height: 100vh;
 }
-.bottom {
-  bottom: 0px;
-  left: 0px;
+.container {
+  width: 100%;
+  height: 100vh;
+  margin: auto;
+}
+.side-menu {
+  width: 100px;
+  background: red;
+  float: left;
 }
 .vertical {
     writing-mode:tb-rl;
@@ -86,7 +90,8 @@ export default {
     font-size: 1.4em;
 }
 .center {
-  margin: 20px;
+  margin-left: 100px;
+  overflow: scroll;
 }
 .scaleImage {
   -webkit-transition: 2s;
